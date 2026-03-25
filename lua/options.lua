@@ -1,6 +1,14 @@
 require "nvchad.options"
 
--- add yours here!
+local o = vim.o
 
--- local o = vim.o
--- o.cursorlineopt ='both' -- to enable cursorline!
+-- IDE-like editor options
+o.relativenumber = true
+o.cursorlineopt = "both"
+o.smoothscroll = true
+o.scrolloff = 8
+o.sidescrolloff = 8
+o.wrap = false
+o.confirm = true
+o.updatetime = 100
+o.timeoutlen = 300

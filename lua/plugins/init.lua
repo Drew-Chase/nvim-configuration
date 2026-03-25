@@ -1,11 +1,12 @@
 return {
+  -- Formatter with format-on-save
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = "BufWritePre",
     opts = require "configs.conform",
   },
 
-  -- These are some examples, uncomment them if you want to see them work!
+  -- LSP
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -13,16 +14,104 @@ return {
     end,
   },
 
-  -- test new blink
-  -- { import = "nvchad.blink.lazyspec" },
+  -- Treesitter: extended languages + incremental selection
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim", "lua", "vimdoc", "html", "css", "javascript", "typescript",
+        "rust", "toml", "json", "yaml", "markdown", "bash",
+      },
+    },
+  },
 
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
+  -- =============================================
+  -- THEME: electron-vue
+  -- =============================================
+  {
+    "rktjmp/lush.nvim",
+    lazy = false,
+  },
+  {
+    "AntonyZ89/electron-vue.nvim",
+    lazy = false,
+    priority = 1000,
+    dependencies = { "rktjmp/lush.nvim" },
+    config = function()
+      vim.cmd "colorscheme electron-vue"
+    end,
+  },
+
+  -- =============================================
+  -- MULTI-CURSOR (VSCode Ctrl+D style)
+  -- =============================================
+  {
+    "mg979/vim-visual-multi",
+    branch = "master",
+    event = "BufReadPost",
+    init = function()
+      vim.g.VM_maps = {
+        ["Find Under"] = "<C-d>",
+        ["Find Subword Under"] = "<C-d>",
+        ["Select All"] = "<C-S-A-j>",
+        ["Add Cursor Down"] = "<C-A-Down>",
+        ["Add Cursor Up"] = "<C-A-Up>",
+      }
+      vim.g.VM_theme = "iceblue"
+    end,
+  },
+
+  -- =============================================
+  -- BETTER TERMINAL
+  -- =============================================
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    keys = { "<C-`>" },
+    opts = {
+      size = function(term)
+        if term.direction == "horizontal" then
+          return 15
+        elseif term.direction == "vertical" then
+          return vim.o.columns * 0.35
+        end
+      end,
+      open_mapping = "<C-`>",
+      direction = "horizontal",
+      shade_terminals = true,
+      shading_factor = 2,
+      float_opts = { border = "curved" },
+    },
+  },
+
+  -- =============================================
+  -- LSP DIAGNOSTICS PANEL
+  -- =============================================
+  {
+    "folke/trouble.nvim",
+    cmd = "Trouble",
+    keys = {
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", desc = "Diagnostics" },
+      { "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", desc = "Buffer diagnostics" },
+    },
+    opts = {},
+  },
+
+  -- =============================================
+  -- GIT
+  -- =============================================
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = "LazyGit",
+    keys = { { "<C-k>", "<cmd>LazyGit<CR>", desc = "LazyGit" } },
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+    keys = {
+      { "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Git diff view" },
+      { "<leader>gh", "<cmd>DiffviewFileHistory %<CR>", desc = "File git history" },
+    },
+  },
 }
