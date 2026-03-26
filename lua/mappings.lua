@@ -104,9 +104,7 @@ map("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 -- Shift+Alt+T for external terminal (IntelliJ: Tool_External Tools_Warp)
 map("t", "<C-`>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
 map("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-map("n", "<S-A-t>", function()
-  require("toggleterm").toggle(0, nil, nil, "float")
-end, { desc = "Floating terminal" })
+map("n", "<S-A-t>", "<cmd>ToggleTerm direction=float<CR>", { desc = "Floating terminal" })
 
 -- =============================================
 -- BUFFER / TAB MANAGEMENT
