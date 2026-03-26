@@ -14,13 +14,22 @@ return {
     end,
   },
 
-  -- Treesitter: extended languages + incremental selection
+  -- Treesitter: extended languages + incremental selection (Ctrl+W / Ctrl+Shift+W)
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
         "vim", "lua", "vimdoc", "html", "css", "javascript", "typescript",
         "rust", "toml", "json", "yaml", "markdown", "bash",
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<C-w>",
+          node_incremental = "<C-w>",
+          node_decremental = "<C-S-w>",
+          scope_incremental = false,
+        },
       },
     },
   },
@@ -38,12 +47,12 @@ return {
     priority = 1000,
     dependencies = { "rktjmp/lush.nvim" },
     config = function()
-      vim.cmd "colorscheme electron-vue"
+      vim.cmd "colorscheme electron-vue-darker"
     end,
   },
 
   -- =============================================
-  -- MULTI-CURSOR (VSCode Ctrl+D style)
+  -- MULTI-CURSOR (IntelliJ: Alt+J select next, Shift+Alt+J unselect, Ctrl+Shift+Alt+J all)
   -- =============================================
   {
     "mg979/vim-visual-multi",
@@ -51,9 +60,10 @@ return {
     event = "BufReadPost",
     init = function()
       vim.g.VM_maps = {
-        ["Find Under"] = "<C-d>",
-        ["Find Subword Under"] = "<C-d>",
+        ["Find Under"] = "<A-j>",
+        ["Find Subword Under"] = "<A-j>",
         ["Select All"] = "<C-S-A-j>",
+        ["Skip Region"] = "<S-A-j>",
         ["Add Cursor Down"] = "<C-A-Down>",
         ["Add Cursor Up"] = "<C-A-Up>",
       }
@@ -67,7 +77,7 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
-    keys = { "<C-`>" },
+    keys = { "<C-`>", "<S-A-t>" },
     opts = {
       size = function(term)
         if term.direction == "horizontal" then
@@ -103,7 +113,7 @@ return {
   {
     "kdheepak/lazygit.nvim",
     cmd = "LazyGit",
-    keys = { { "<C-k>", "<cmd>LazyGit<CR>", desc = "LazyGit" } },
+    keys = { { "<C-k>", "<cmd>LazyGit<CR>", desc = "LazyGit (Git commit)" } },
     dependencies = { "nvim-lua/plenary.nvim" },
   },
   {
