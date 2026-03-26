@@ -3,7 +3,7 @@ require "nvchad.options"
 local o = vim.o
 
 -- IDE-like editor options
-o.relativenumber = true
+o.relativenumber = false
 o.cursorlineopt = "both"
 o.smoothscroll = true
 o.scrolloff = 8

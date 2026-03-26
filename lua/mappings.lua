@@ -58,8 +58,25 @@ map("v", "<C-A-c>", "gb", { desc = "Toggle block comment", remap = true })
 map("n", "<C-f>", "/", { desc = "Find in file" })
 map("n", "<C-h>", ":%s/", { desc = "Find and replace" })
 map("n", "<C-p>", "<cmd>Telescope find_files<CR>", { desc = "Quick file open" })
-map("n", "<C-S-p>", "<cmd>Telescope commands<CR>", { desc = "Command palette" })
--- FindInPath had no binding in your keymap; using leader combo
+
+-- IntelliJ Search Everywhere (Shift+Shift) - searches files, commands, symbols all at once
+map("n", "<S-S-CR>", "<cmd>Telescope find_files<CR>", { desc = "Search everywhere" })
+-- Workaround: double-shift can't be mapped directly in Neovim, use leader shortcut
+map("n", "<leader><leader>", "<cmd>Telescope find_files<CR>", { desc = "Search everywhere" })
+
+-- Ctrl+Shift+N: Go to file
+map("n", "<C-S-n>", "<cmd>Telescope find_files<CR>", { desc = "Go to file" })
+
+-- Ctrl+Shift+A: Find action / command palette
+map("n", "<C-S-a>", "<cmd>Telescope commands<CR>", { desc = "Find action" })
+
+-- Ctrl+Alt+Shift+E: Search by text (grep) through workspace
+map("n", "<C-A-S-e>", "<cmd>Telescope live_grep<CR>", { desc = "Search by text in files" })
+
+-- Ctrl+Alt+Shift+N: Go to symbol
+map("n", "<C-A-S-n>", "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", { desc = "Go to symbol" })
+
+-- Keep leader combo as fallback
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "Find in files (live grep)" })
 
 -- =============================================
