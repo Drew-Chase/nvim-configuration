@@ -77,6 +77,7 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
+    cmd = "ToggleTerm",
     keys = { "<C-`>", "<S-A-t>" },
     opts = {
       size = function(term)
