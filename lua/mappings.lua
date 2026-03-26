@@ -163,11 +163,8 @@ map("n", "<A-CR>", vim.lsp.buf.code_action, { desc = "Code action / quick fix" }
 map("n", "<C-.>", vim.lsp.buf.code_action, { desc = "Code action" })
 
 -- Go to definition (Vim standard, IntelliJ: Ctrl+B for declaration)
+-- Ctrl+B is used for file explorer, so gd is the go-to-definition key
 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-map("n", "<C-b>", vim.lsp.buf.definition, { desc = "Go to declaration" })
--- Note: Ctrl+B conflicts with file explorer toggle above
--- In normal buffers with LSP, Ctrl+B goes to definition
--- Use <leader>e or NvimTreeToggle command for file tree
 
 -- Trigger autocomplete
 map("n", "<C-Space>", function()
