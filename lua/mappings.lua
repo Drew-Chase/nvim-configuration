@@ -21,8 +21,11 @@ del("n", "<C-h>") -- was: window left
 -- =============================================
 -- SAVE (IntelliJ: Ctrl+S / Ctrl+Shift+S = SaveAll)
 -- =============================================
-map({ "n", "i", "v" }, "<C-s>", "<Esc><cmd>wa<CR>", { desc = "Save all" })
-map({ "n", "i", "v" }, "<C-S-s>", "<Esc><cmd>wa<CR>", { desc = "Save all" })
+map("n", "<C-s>", "<cmd>wa<CR>", { desc = "Save all" })
+map("v", "<C-s>", "<Esc><cmd>wa<CR>", { desc = "Save all" })
+map("i", "<C-s>", "<cmd>wa<CR>", { desc = "Save all" })
+map("n", "<C-S-s>", "<cmd>wa<CR>", { desc = "Save all" })
+map("i", "<C-S-s>", "<cmd>wa<CR>", { desc = "Save all" })
 
 -- =============================================
 -- UNDO / REDO (IntelliJ: Ctrl+Z / Ctrl+Shift+Z / Ctrl+Y)
